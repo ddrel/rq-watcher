@@ -5,10 +5,11 @@ from os import path
 from environs import Env
 from redis import Redis
 from app.queue import redisQueue
+env = Env()
+env.read_env()
 
-
-basepath = path.dirname(__file__)
-src_path = path.join(basepath, "app","folder_pass")
+#basepath = path.dirname(__file__)
+#src_path = path.join(basepath, "app","folder_pass")
 
 
 class Handler(watchdog.events.PatternMatchingEventHandler): 
@@ -36,6 +37,7 @@ class Handler(watchdog.events.PatternMatchingEventHandler):
 if __name__ == "__main__":   
     event_handler = Handler() 
     observer = watchdog.observers.Observer() 
+    src_path = env.str("folder_pass")
     observer.schedule(event_handler, path=src_path, recursive=False) 
     observer.start() 
     try: 

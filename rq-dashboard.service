@@ -1,0 +1,21 @@
+[Unit]
+Description=Watcher dog service
+After=network.target
+
+[Service]
+Type=simple
+User=darel
+WorkingDirectory=/home/darel/app/rqapp
+ExecStart=/home/darel/app/rqapp/rq-app/bin/python /home/darel/app/rqapp/rq-dashboard 
+
+
+SuccessExitStatus=143
+Restart=on-failure
+TimeoutStopSec=10
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+
+#sudo systemctl daemon-reload
+#sudo systemctl start era5_filewatcher.service

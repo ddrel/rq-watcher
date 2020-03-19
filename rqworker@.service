@@ -24,3 +24,4 @@ WantedBy=multi-user.target
 # sudo systemctl status rqworker@{1..6}
 # sudo systemctl disable rqworker@{1..6}
 # sudo systemctl enable rqworker@{1..6}
+# sudo journalctl -f -n 1000 -u rqworker@1
