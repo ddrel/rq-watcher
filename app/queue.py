@@ -1,8 +1,8 @@
 from redis import Redis
 from rq import Queue
 from os import path
-from module_extractcsv import extractcsv
-from module_movefile import movefile
+from app.module_extractcsv import extractcsv
+from app.module_movefile import movefile
 import os
 from environs import Env
 
@@ -23,11 +23,11 @@ class redisQueue:
     def queue(self):
         print("queue >>> " + self.file_path)
         csv = extractcsv(self.file_path,isleapyear=self.isleapyear)
-        job_csv = self.q.enqueue(csv.process,result_ttl=2,job_timeout="1h")
+        job_csv = self.q.enqueue(csv.process,result_ttl=1,job_timeout="2h")
 
         dist_path = self.env.str("folder_processed")
-        self.q.enqueue(movefile,args=(self.file_path,dist_path), depends_on=job_csv,job_timeout="20m")
-        return job_csv
+        job_moved= self.q.enqueue(movefile,args=(self.file_path,dist_path), depends_on=job_csv,result_ttl=1,job_timeout="1h")
+        return job_moved
 
     def lenght(self):
         return len(self.q)

@@ -44,8 +44,8 @@ class extractcsv:
         
         counter = 367 if self.isleapyear else 366
 
-        for int_Counter in range(0,7490):
-            for int_TimeCounter in range(1,counter):
+        for int_Counter in range(0,10): #7490
+            for int_TimeCounter in range(1,counter):                
                 file_Output.write(line_Data[int_Counter + 1].rstrip("\n") + "," )
                 file_Output.write(str(nc_File.variables['latitude'][int_Counter]) + ",")
                 file_Output.write(str(nc_File.variables['longitude'][int_Counter]) + ",")

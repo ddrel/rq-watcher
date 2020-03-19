@@ -1,5 +1,5 @@
-from redis import Redis
-from queue import redisQueue
+#from redis import Redis
+#from queue import redisQueue
 from module_movefile import movefile
 
 ''' 
@@ -25,8 +25,5 @@ print(rq.lenght())
 rq.queue()
 '''
 
-def qt(path):
-    rq = redisQueue(path)
-    rq.connection(Redis()) 
-    print(rq.lenght())
-    rq.queue()
+
+movefile("/home/darel/app/rqapp/app/folder_processed/era5land_at_metars_2015.nc","/home/darel/app/rqapp/app/folder_pass")
